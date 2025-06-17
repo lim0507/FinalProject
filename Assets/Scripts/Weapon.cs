@@ -54,8 +54,25 @@ public class Weapon : MonoBehaviour
         if (id == 0)
             Batch();
     }
-    public void InIt()
+    public void InIt(ItemData data)
     {
+        name = "Weapon" + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for(int index=0; index < GameManager.instance.pool.prefabs.Length; index++)
+        {
+            if(data.projectile == GameManager.instance.pool.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
         switch (id)
         {
             case 0:
@@ -99,7 +116,7 @@ public class Weapon : MonoBehaviour
             return;
 
         Vector3 targetPos = player.scanner.nearestTarget.position;
-        Vector3 dir = targetPos = transform.position;
+        Vector3 dir = targetPos - transform.position;
         dir = dir.normalized;
 
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
