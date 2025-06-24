@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float speed;
     public Scanner scanner;
     public Hand[] hands;
-
+    public RuntimeAnimatorController[] animCon;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     Animator anim;
@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
         hands = GetComponentsInChildren<Hand>(true);
+    }
+    private void OnEnable()
+    {
+        speed *= Charater.Speed;
+        anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
     }
     // Update is called once per frame
     void Update()
@@ -66,6 +71,7 @@ public class Player : MonoBehaviour
                 transform.GetChild(index).gameObject.SetActive(false);
             }
             anim.SetTrigger("Dead");
+            GameManager.instance.GameOver();
         }
     }
 }
