@@ -124,7 +124,7 @@ public class AchiveManager : MonoBehaviour
         switch (achive)
         {
             case Achive.unlockPotato:
-                isAchive = GameManager.instance.kill >= 10;
+                isAchive = GameManager.instance.kill >= 100;
                 break;
             case Achive.unlockBean:
                 isAchive = GameManager.instance.gameTime >= GameManager.instance.maxGameTime;

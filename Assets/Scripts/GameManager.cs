@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public int level;
     public int kill;
     public int exp;
-    public int[] nextExp = { 10, 30, 60, 100, 150, 210, 280, 360, 450, 600 };
+    public int[] nextExp = { 3, 5, 10, 30, 50, 80, 100, 200, 300, 400 };
     [Header("# Game Object")]
     public PoolManager pool;
     public Player player;
@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         SceneManager.LoadScene(0);
+    }
+    public void GameQuit()
+    {
+        Application.Quit();
     }
     void Update()
     {
